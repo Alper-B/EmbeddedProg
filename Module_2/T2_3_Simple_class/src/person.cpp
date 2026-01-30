@@ -2,7 +2,6 @@
 
 // define your Person class' functions here
 
-
 Person::Person(const std::string& name, int year) : Name(name), birthyear(year) {}
 
 std::string Person::GetName() const {
@@ -12,4 +11,3 @@ std::string Person::GetName() const {
 int Person::GetAge(int year) const {
     return year - birthyear;
 }
-

@@ -1,8 +1,7 @@
 #ifndef AALTO_ELEC_CPP_PERSON
 #define AALTO_ELEC_CPP_PERSON
 
-// declare your Person class here
-
+#include <string> 
 
 class Person {
 private:
@@ -11,7 +10,7 @@ private:
 
 public:
     Person(const std::string& name, int year); 
-    std::string GetName() const; 
-    int GetAge(int year) const;   
+    std::string GetName() const;              
+    int GetAge(int year) const;                
 
-#endif
+#endif 
