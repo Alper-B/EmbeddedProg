@@ -3,22 +3,22 @@
 
 #include <string>
 
-/**
- * \brief A simple class to represent a dog
- *
- */
 class Dog {
-  
-  Dog(int age, std::string name);
+public:
+    // Constructor
+    Dog(int age, const std::string& name);
 
-  void SetAge(int age);
-  int GetAge();
-  void SetName(std::string name);
-  std::string GetName();
+    // Setters
+    void SetAge(int age);
+    void SetName(const std::string& name);
 
- private:
-  int age_;
-  std::string name_;
-} 
+    // Getters
+    int GetAge() const;
+    std::string GetName() const;
+
+private:
+    int age_;
+    std::string name_;
+};
 
 #endif
