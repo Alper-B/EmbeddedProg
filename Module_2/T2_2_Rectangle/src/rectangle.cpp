@@ -25,6 +25,15 @@ will need to actually calculate the area and circumference.
 // Write you function here and test it with the main.
 
 void Rectangle() {
-    
+    double width, height;
+
+    std::cout << "Please enter width and height\n";
+    std::cin >> width >> height;
+
+    double area = width * height;
+    double circumference = 2 * (width + height);
+
+    std::cout << "Area: " << area << std::endl;
+    std::cout << "Circumference: " << circumference << std::endl;
 }
 
