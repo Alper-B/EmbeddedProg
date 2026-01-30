@@ -1,8 +1,4 @@
 #include "person.hpp"
-#include <iostream>
-
-
-// define your Person class' functions here
 
 Person::Person(const std::string& name, int year) : Name(name), birthyear(year) {}
 
