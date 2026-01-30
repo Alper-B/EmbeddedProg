@@ -1,7 +1,6 @@
 #ifndef AALTO_ELEC_CPP_PERSON
 #define AALTO_ELEC_CPP_PERSON
 
-#include <string> 
 
 class Person {
 private:
