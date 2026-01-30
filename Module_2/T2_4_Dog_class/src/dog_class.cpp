@@ -1,55 +1,22 @@
 #include "dog_class.hpp"
 
-// Definitions of class functions with some errors
+// Constructor
+Dog::Dog(int age, const std::string& name) : age_(age), name_(name) {}
 
-/**
- * \brief Construct a new Dog object
- *
- * \param a age of the dog
- * \param n name of the dog
- */
-
-  Dog(int a, string n) { 
-  age_ = a; 
-  name_ = n; 
+// Setters
+void Dog::SetAge(int age) {
+    age_ = age;
 }
 
-/**
- * \brief Sets the age of the dog
- *
- * \param a The age of the dog
- */
-
-  Dog::setAge(int a) {
-      age_ = a; 
+void Dog::SetName(const std::string& name) {
+    name_ = name;
 }
 
-/**
- * \brief Returns the age of the dog
- *
- * \return The age of the dog
- */
-
-  Dog::GetAge() {
-      return age_; 
+// Getters
+int Dog::GetAge() const {
+    return age_;
 }
 
-/**
- * \brief Sets the name of the dog
- *
- * \param n The name of the dog
- */
-
-  Dog::setName(string n) {
-      name_ = n; 
-}
-
-/**
- * \brief Returns the name of the dog
- *
- * \return The name of the dog as std::string
- */
-
-  Dog::getName() {
-      return name_; 
+std::string Dog::GetName() const {
+    return name_;
 }
