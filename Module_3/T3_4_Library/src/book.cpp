@@ -1,28 +1,44 @@
 #include "book.hpp"
-
 #include <iostream>
-class Book {
- public:
-  Book(const std::string& name,
-       const std::string& author,
-       const std::string& isbn,
-       bool loaned = false,
-       Date due_date = {0, 0, 0});
 
-  std::string GetName() const;
-  std::string GetAuthor() const;
-  std::string GetISBN() const;
-  bool GetStatus() const;
-  Date GetDueDate() const;
+Book::Book(const std::string& name,
+           const std::string& author,
+           const std::string& isbn,
+           bool loaned,
+           Date due_date)
+    : name_(name),
+      author_(author),
+      isbn_(isbn),
+      loaned_(loaned),
+      due_date_(due_date) {}
 
-  bool Loan();
-  void Restore();
-  void Print() const;
+std::string Book::GetName() const { return name_; }
+std::string Book::GetAuthor() const { return author_; }
+std::string Book::GetISBN() const { return isbn_; }
+bool Book::GetStatus() const { return loaned_; }
+Date Book::GetDueDate() const { return due_date_; }
 
- private:
-  std::string name_;
-  std::string author_;
-  std::string isbn_;
-  bool loaned_;
-  Date due_date_;
-};
+bool Book::Loan() {
+  if (loaned_) return false;
+
+  Date d = Date::Today();
+  d.month += 1;
+  if (d.month > 12) {
+    d.month = 1;
+    d.year += 1;
+  }
+
+  due_date_ = d;
+  loaned_ = true;
+  return true;
+}
+
+void Book::Restore() {
+  loaned_ = false;
+  due_date_ = {0, 0, 0};
+}
+
+void Book::Print() const {
+  std::cout << "Book: " << name_
+            << ", author: " << author_
+            << ", ISBN: " <<
