@@ -14,6 +14,7 @@ std::vector<int> ReadVector() {
 }
 
 void PrintSum1(const std::vector<int>& v) {
+
     if (v.size() < 2) {
         std::cout << "\n";
         return;
@@ -34,7 +35,7 @@ void PrintSum2(const std::vector<int>& v) {
     auto beg = v.begin();
     auto end = v.end() - 1;
 
-    while (beg <= end) {
+    while (beg < end) {
         std::cout << *beg + *end << " ";
         
         ++beg;
