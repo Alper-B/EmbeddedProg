@@ -2,52 +2,22 @@
 
 #include <iostream>
 
-Customer::Customer(const std::string& name, const std::string& id)
-    : name_(name), id_(id) {}
+class Customer {
+ public:
+  Customer(const std::string& name, const std::string& id);
 
-std::string Customer::GetName() const {
-    return name_;
-}
+  std::string GetName() const;
+  std::string GetID() const;
+  int GetLoanAmount() const;
+  std::vector<Book> GetLoans() const;
 
-std::string Customer::GetID() const {
-    return id_;
-}
+  bool LoanBook(Book& b);
+  void ReturnBook(Book& b);
+  void Print() const;
 
-int Customer::GetLoanAmount() const {
-    return loans_.size();
-}
+ private:
+  std::string name_;
+  std::string id_;
+  std::vector<Book> loans_;
+};
 
-std::vector<Book> Customer::GetLoans() const {
-    return loans_;
-}
-
-bool Customer::LoanBook(Book& b) {
-    if (!b.Loan()) {
-        return false;
-    }
-
-    loans_.push_back(b);
-    return true;
-}
-
-void Customer::ReturnBook(Book& b) {
-    for (auto it = loans_.begin(); it != loans_.end(); ++it) {
-        if (it->GetISBN() == b.GetISBN()) {
-            loans_.erase(it);
-            b.Restore();
-            return;
-        }
-    }
-}
-
-void Customer::Print() const {
-    std::cout << "Customer: " << name_
-              << ", " << id_
-              << ", has " << loans_.size()
-              << " books on loan:" << std::endl;
-
-    for (const auto& b : loans_) {
-        std::cout << "- ";
-        b.Print();
-    }
-}

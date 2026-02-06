@@ -1,53 +1,20 @@
 #include "library.hpp"
 
-Library::Library(const std::string& name) : name_(name) {}
+class Library {
+ public:
+  Library(const std::string& name);
 
-std::string Library::GetName() const {
-    return name_;
-}
+  std::string GetName() const;
+  std::vector<Book>& GetBooks();
+  std::vector<Customer>& GetCustomers();
 
-std::vector<Book>& Library::GetBooks() {
-    return books_;
-}
+  Book FindBookByName(const std::string& name);
+  std::vector<Book> FindBooksByAuthor(const std::string& name);
+  std::vector<Book> FindAllLoanedBooks();
+  Customer FindCustomer(const std::string& id);
 
-std::vector<Customer>& Library::GetCustomers() {
-    return customers_;
-}
-
-Book Library::FindBookByName(const std::string& name) {
-    for (const auto& b : books_) {
-        if (b.GetName() == name) {
-            return b;
-        }
-    }
-    return Book("", "", "");
-}
-
-std::vector<Book> Library::FindBooksByAuthor(const std::string& name) {
-    std::vector<Book> result;
-    for (const auto& b : books_) {
-        if (b.GetAuthor() == name) {
-            result.push_back(b);
-        }
-    }
-    return result;
-}
-
-std::vector<Book> Library::FindAllLoanedBooks() {
-    std::vector<Book> result;
-    for (const auto& b : books_) {
-        if (b.GetStatus()) {
-            result.push_back(b);
-        }
-    }
-    return result;
-}
-
-Customer Library::FindCustomer(const std::string& id) {
-    for (const auto& c : customers_) {
-        if (c.GetID() == id) {
-            return c;
-        }
-    }
-    return Customer("", "");
-}
+ private:
+  std::string name_;
+  std::vector<Book> books_;
+  std::vector<Customer> customers_;
+};
