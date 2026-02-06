@@ -36,7 +36,7 @@ void PrintSum2(const std::vector<int>& v) {
     auto front = v.begin();
     auto back = v.end() - 1;
 
-    while (front <= back) {
+    while (front < back) {
         std::cout << *front + *back << " ";
         ++front;
         --back;
