@@ -17,8 +17,8 @@ public:
 
     // Operations
     void Print() const;
-    bool Loan();   // Returns true if loan logic was successful (was not already loaned)
-    void Restore(); // Sets status back to available
+    bool Loan();    // Returns true if loan successful, false if already loaned
+    void Restore(); // Returns book (sets status to false)
 
 private:
     std::string name_;

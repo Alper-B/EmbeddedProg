@@ -8,17 +8,14 @@
 
 class Library {
 public:
-    // Constructor
     Library(const std::string& name);
 
-    // Getters
     std::string GetName() const;
     
-    // NOTE: These return references so main can modify the vectors directly
+    // Must return references so main can modify the library's contents
     std::vector<Book>& GetBooks();
     std::vector<Customer>& GetCustomers();
 
-    // Search Functions
     Book FindBookByName(const std::string& name);
     std::vector<Book> FindBooksByAuthor(const std::string& author);
     std::vector<Book> FindAllLoanedBooks();
