@@ -47,6 +47,6 @@ class Creature {
 };
 
 // Declare the '<<' operator here
-
+std::ostream& operator<<(std::ostream& out, const Creature& c);
 
 #endif

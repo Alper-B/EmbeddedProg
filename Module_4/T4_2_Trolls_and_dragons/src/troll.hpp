@@ -10,7 +10,8 @@
  * required functionalities outlined in the given main function
  */
 class Troll : public Creature {
-  
+public:
+    Troll(const std::string& name, int hitpoints);
 };
 
 #endif
