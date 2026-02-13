@@ -5,15 +5,22 @@
 
 /**
  * \brief TODO: Implement the Owl class.
- *
- * Class' constructor takes a string as an argument, which is the owl's name.
- * When the Speak method is called an owl should say: <name>: WHUU\n
- * into the stream given as the argument.
- *
- * Due to the simplicity of the class, all of its member functions are
- * implemented in this header file.
  */
+class Owl : public Bird {
+public:
+    /**
+     * \brief Constructor for Owl
+     * \param name The name of the owl
+     */
+    Owl(const std::string& name) : Bird(name) {}
 
-
+    /**
+     * \brief Implements the Speak method
+     * \param os Output stream to write to
+     */
+    void Speak(std::ostream& os) const override {
+        os << GetName() << ": WHUU" << std::endl;
+    }
+};
 
 #endif
