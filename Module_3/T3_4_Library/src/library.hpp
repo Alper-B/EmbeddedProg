@@ -1,5 +1,5 @@
-#ifndef ELEC_AS_CPP_LIBRARY
-#define ELEC_AS_CPP_LIBRARY
+#ifndef LIBRARY_HPP
+#define LIBRARY_HPP
 
 #include <string>
 #include <vector>
@@ -7,22 +7,27 @@
 #include "customer.hpp"
 
 class Library {
- public:
-  Library(const std::string& name);
+public:
+    // Constructor
+    Library(const std::string& name);
 
-  std::string GetName() const;
-  std::vector<Book>& GetBooks();
-  std::vector<Customer>& GetCustomers();
+    // Getters
+    std::string GetName() const;
+    
+    // NOTE: These return references so main can modify the vectors directly
+    std::vector<Book>& GetBooks();
+    std::vector<Customer>& GetCustomers();
 
-  Book FindBookByName(const std::string& name);
-  std::vector<Book> FindBooksByAuthor(const std::string& name);
-  std::vector<Book> FindAllLoanedBooks();
-  Customer FindCustomer(const std::string& id);
+    // Search Functions
+    Book FindBookByName(const std::string& name);
+    std::vector<Book> FindBooksByAuthor(const std::string& author);
+    std::vector<Book> FindAllLoanedBooks();
+    Customer FindCustomer(const std::string& id);
 
- private:
-  std::string name_;
-  std::vector<Book> books_;
-  std::vector<Customer> customers_;
+private:
+    std::string name_;
+    std::vector<Book> books_;
+    std::vector<Customer> customers_;
 };
 
 #endif
