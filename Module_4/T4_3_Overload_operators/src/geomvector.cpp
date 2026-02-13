@@ -1,7 +1,24 @@
 #include "geomvector.hpp"
 
-// Implement operators here
+GeomVector GeomVector::operator/(double a) const {
+    return GeomVector(x_ / a, y_ / a, z_ / a);
+}
 
+bool GeomVector::operator<(const GeomVector& a) const {
+    return this->Length() < a.Length();
+}
+
+bool GeomVector::operator>(const GeomVector& a) const {
+    return this->Length() > a.Length();
+}
+
+bool GeomVector::operator==(const GeomVector& a) const {
+    return (x_ == a.x_) && (y_ == a.y_) && (z_ == a.z_);
+}
+
+bool GeomVector::operator!=(const GeomVector& a) const {
+    return !(*this == a);
+}
 
 GeomVector GeomVector::operator+(const GeomVector& a) {
     return GeomVector(a.x_ + x_, a.y_ + y_, a.z_ + z_);
