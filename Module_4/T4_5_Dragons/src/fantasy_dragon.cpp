@@ -9,7 +9,7 @@ void FantasyDragon::Eat(std::list<Food>& food) {
     while (it != food.end()) {
         if (it->type == People || it->type == PeopleFood) {
             size_++;
-            std::cout << "Fantasy dragon ate: " << it->name << "\n";
+            std::cout << "Fantasy dragon ate: " << it->name << std::endl;
             it = food.erase(it);
         } else {
             ++it;
@@ -22,7 +22,7 @@ void FantasyDragon::Hoard(std::list<Treasure>& treasures) {
     while (it != treasures.end()) {
         if (it->type == Jewellery) {
             treasures_.push_back(*it);
-            std::cout << "Fantasy dragon received: " << it->name << "\n";
+            std::cout << "Fantasy dragon received: " << it->name << std::endl;
             it = treasures.erase(it);
         } else {
             ++it;

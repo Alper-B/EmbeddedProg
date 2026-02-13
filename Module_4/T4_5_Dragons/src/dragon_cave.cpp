@@ -21,6 +21,8 @@ void DragonCave::Accommodate(Dragon* dragon) {
 void DragonCave::Evict(const std::string& name) {
     for (auto it = dragons_.begin(); it != dragons_.end(); ++it) {
         if ((*it)->GetName() == name) {
+            // Note: we just erase the pointer, not delete the object
+            // per instructions "DOES NOT delete the Dragon object"
             dragons_.erase(it);
             return;
         }
