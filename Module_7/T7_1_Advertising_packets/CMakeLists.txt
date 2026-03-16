@@ -1,0 +1,20 @@
+cmake_minimum_required(VERSION 3.11.0)
+project(t7_2_advertising_packets VERSION 0.1.0)
+
+enable_language(CXX)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_BUILD_TYPE Debug)
+
+file(GLOB SOURCES_CPP "src/*.cpp")
+file(GLOB SOURCES_HPP "src/*.hpp")
+file(GLOB SOURCES_H "src/*.h")
+add_executable(t7_2_advertising_packets)
+target_sources(t7_2_advertising_packets PUBLIC ${SOURCES_CPP} ${SOURCES_H} ${SOURCES_HPP})
+target_include_directories(t7_2_advertising_packets PUBLIC .)
+target_include_directories(t7_2_advertising_packets PUBLIC src)
+if(MSVC)
+  target_compile_options(t7_2_advertising_packets PRIVATE /Wall)
+else()
+  target_compile_options(t7_2_advertising_packets PRIVATE -Wall -Wextra -pedantic)
+endif()
+
