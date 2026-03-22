@@ -1,0 +1,17 @@
+# ignore everything by default
+*
+
+# keep the workspace gitignore itself
+!.gitignore
+
+# keep directories so the allow rules below can match recursively
+!src/
+
+# keep source and build-description files in this directory and subdirectories
+!*.c
+!*.cpp
+!*.h
+!*.hpp
+!CMakeLists.txt
+!*.gatt
+!*.txt

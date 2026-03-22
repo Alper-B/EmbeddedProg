@@ -1,0 +1,13 @@
+// Template GATT profile for ELEC C7222 Module 8 Task 8.5.
+// The file contains task-specific TODO expectations from the section text.
+
+PRIMARY_SERVICE, GAP_SERVICE
+CHARACTERISTIC, GAP_DEVICE_NAME, READ, "c7222-custom-gatt"
+
+PRIMARY_SERVICE, GATT_SERVICE
+CHARACTERISTIC, GATT_DATABASE_HASH, READ,
+
+// TODO: Add the custom primary service here.
+// TODO: Add the three required custom characteristics and their user descriptions here.
+
+
