@@ -25,19 +25,19 @@ c7222::Service CreateBoardStatusService() {
                              static_cast<std::uint8_t>(c7222::Characteristic::Properties::kWrite);
     auto& led_char = service.CreateCharacteristic(c7222::Uuid(0xFFF1), led_props, 0x0002, 0x0003);
     led_char.SetValue(std::vector<std::uint8_t>{0x00});
-    led_char.SetUserDescription("LED State");
+    led_char.SetUserDescription("LED State").SetHandle(0x0004);
 
     std::uint8_t btn_props = static_cast<std::uint8_t>(c7222::Characteristic::Properties::kRead) | 
                              static_cast<std::uint8_t>(c7222::Characteristic::Properties::kNotify);
     auto& btn_char = service.CreateCharacteristic(c7222::Uuid(0xFFF2), btn_props, 0x0005, 0x0006);
     btn_char.SetValue(std::vector<std::uint8_t>{0x00, 0x00});
-    btn_char.EnableCCCD();
-    btn_char.SetUserDescription("Button Count");
+    btn_char.EnableCCCD().SetHandle(0x0007);
+    btn_char.SetUserDescription("Button Count").SetHandle(0x0008);
 
     std::uint8_t temp_props = static_cast<std::uint8_t>(c7222::Characteristic::Properties::kRead);
     auto& temp_char = service.CreateCharacteristic(c7222::Uuid(0xFFF3), temp_props, 0x0009, 0x000A);
     temp_char.SetValue(std::vector<std::uint8_t>{0x19});
-    temp_char.SetUserDescription("Temperature");
+    temp_char.SetUserDescription("Temperature").SetHandle(0x000B);
 
     return service;
 }
