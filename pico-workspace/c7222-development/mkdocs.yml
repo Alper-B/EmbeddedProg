@@ -1,0 +1,22 @@
+site_name: "ELEC-C7222 Library Documentation"
+theme:
+  name: material
+docs_dir: doc/markdown
+exclude_docs: |
+  ../BTstack-md/**
+  ../FreeRTOS-Kernel-Book/**
+  **/elec-c7222/**
+  mainpage.md
+
+plugins:
+  - search
+
+nav:
+  - Home: index.md
+  - Getting Started: getting-started.md
+  - Build: building.md
+  - API Reference: api-reference.md
+
+validation:
+  links:
+    not_found: ignore
