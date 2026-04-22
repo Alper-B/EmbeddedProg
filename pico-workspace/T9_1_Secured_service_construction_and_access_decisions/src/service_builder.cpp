@@ -10,42 +10,48 @@ Service CreateSecureBoardStatusService() {
     // ------------------------------------------------------------------
     // Characteristic 1: LED State
     // ------------------------------------------------------------------
-    auto* led_char = service.CreateCharacteristic(
+    uint8_t led_props = static_cast<uint8_t>(Characteristic::Properties::kRead) | 
+                        static_cast<uint8_t>(Characteristic::Properties::kWrite);
+    auto& led_char = service.CreateCharacteristic(
         Uuid(0xFFF1), 
+        led_props,
         0x0002, // Declaration handle
-        0x0003, // Value handle
-        Characteristic::Property::kRead | Characteristic::Property::kWrite
+        0x0003  // Value handle
     );
-    led_char->SetValue(std::vector<uint8_t>{0x00});
-    led_char->SetWriteSecurityLevel(Characteristic::SecurityLevel::kAuthenticationRequired);
-    led_char->SetUserDescription("LED State", 0x0004);
+    led_char.SetValue(std::vector<uint8_t>{0x00});
+    led_char.SetWriteSecurityLevel(Characteristic::SecurityLevel::kAuthenticationRequired);
+    led_char.SetUserDescription("LED State").SetHandle(0x0004);
 
     // ------------------------------------------------------------------
     // Characteristic 2: Button Count
     // ------------------------------------------------------------------
-    auto* button_char = service.CreateCharacteristic(
+    uint8_t button_props = static_cast<uint8_t>(Characteristic::Properties::kRead) | 
+                           static_cast<uint8_t>(Characteristic::Properties::kNotify);
+    auto& button_char = service.CreateCharacteristic(
         Uuid(0xFFF2), 
+        button_props,
         0x0005, // Declaration handle
-        0x0006, // Value handle
-        Characteristic::Property::kRead | Characteristic::Property::kNotify
+        0x0006  // Value handle
     );
-    button_char->SetValue(std::vector<uint8_t>{0x00, 0x00});
-    button_char->SetReadSecurityLevel(Characteristic::SecurityLevel::kEncryptionRequired);
-    button_char->EnableCCCD(0x0007); 
-    button_char->SetUserDescription("Button Count", 0x0008);
+    button_char.SetValue(std::vector<uint8_t>{0x00, 0x00});
+    button_char.SetReadSecurityLevel(Characteristic::SecurityLevel::kEncryptionRequired);
+    button_char.EnableCCCD().SetHandle(0x0007); 
+    button_char.SetUserDescription("Button Count").SetHandle(0x0008);
 
     // ------------------------------------------------------------------
     // Characteristic 3: Control Mode
     // ------------------------------------------------------------------
-    auto* control_char = service.CreateCharacteristic(
+    uint8_t control_props = static_cast<uint8_t>(Characteristic::Properties::kRead) | 
+                            static_cast<uint8_t>(Characteristic::Properties::kWrite);
+    auto& control_char = service.CreateCharacteristic(
         Uuid(0xFFF3), 
+        control_props,
         0x0009, // Declaration handle
-        0x000A, // Value handle
-        Characteristic::Property::kRead | Characteristic::Property::kWrite
+        0x000A  // Value handle
     );
-    control_char->SetValue(std::vector<uint8_t>{0x01});
-    control_char->SetWriteSecurityLevel(Characteristic::SecurityLevel::kAuthorizationRequired);
-    control_char->SetUserDescription("Control Mode", 0x000B);
+    control_char.SetValue(std::vector<uint8_t>{0x01});
+    control_char.SetWriteSecurityLevel(Characteristic::SecurityLevel::kAuthorizationRequired);
+    control_char.SetUserDescription("Control Mode").SetHandle(0x000B);
 
     return service;
 }
@@ -53,7 +59,6 @@ Service CreateSecureBoardStatusService() {
 std::vector<uint16_t> CollectProtectedValueHandles(const Service& service) {
     std::vector<uint16_t> protected_handles;
 
-    // Use reference instead of pointer for the iterator
     for (const auto& charac : service.GetCharacteristics()) {
         bool requires_protection = 
             (charac.GetReadSecurityLevel() != Characteristic::SecurityLevel::kNone) ||
@@ -72,8 +77,8 @@ AccessDecision EvaluateReadAccess(const Characteristic* characteristic, uint8_t 
         return AccessDecision::kNotPermitted;
     }
 
-    // Check if the characteristic actually supports Read operations
-    if ((characteristic->GetProperties() & Characteristic::Property::kRead) == 0) {
+    // Rely on the API's helper method rather than manual bitmasking
+    if (!characteristic->CanRead()) {
         return AccessDecision::kNotPermitted;
     }
 
@@ -98,8 +103,8 @@ AccessDecision EvaluateWriteAccess(const Characteristic* characteristic, uint8_t
         return AccessDecision::kNotPermitted;
     }
 
-    // Check if the characteristic actually supports Write operations
-    if ((characteristic->GetProperties() & Characteristic::Property::kWrite) == 0) {
+    // Rely on the API's helper method rather than manual bitmasking
+    if (!characteristic->CanWrite() && !characteristic->CanWriteWithoutResponse()) {
         return AccessDecision::kNotPermitted;
     }
 
